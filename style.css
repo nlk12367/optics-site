@@ -49,16 +49,6 @@ body {
     padding: 0;
 }
 
-/* 黑暗模式切換按鈕 */
-.theme-toggle {
-    background: none;
-    border: none;
-    font-size: 1.2rem;
-    cursor: pointer;
-    padding: 14px 20px;
-    color: white;
-}
-
 /* 內容置中 */
 .ctr {
     text-align: center;
@@ -72,22 +62,6 @@ body {
 .container { max-width: 900px; margin: 0 auto; padding: 20px; }
 header { background-color: var(--header-bg); color: white; padding: 20px; text-align: center; }
 header h1 { margin: 0; }
-nav { background-color: var(--nav-bg); }
-nav ul { 
-    list-style: none; 
-    margin: 0; 
-    padding: 0; 
-    display: flex; 
-    justify-content: center; 
-    flex-wrap: wrap;
-}
-nav li a { display: block; color: white; padding: 14px 20px; text-decoration: none; }
-nav li a:hover { background-color: var(--nav-hover); }
-/* 目前選中章節的樣式 */
-nav li a.active {
-    background-color: #007BFF;
-    font-weight: bold;
-}
 
 /* 模組樣式 */
 .chapter-title { color: #004a99; border-bottom: 2px solid var(--module-border); padding-bottom: 10px; margin-top: 10px; }
@@ -98,7 +72,6 @@ nav li a.active {
     padding: 25px; 
     margin-top: 20px; 
     box-shadow: 0 2px 5px var(--module-shadow);
-    /* 動畫 */
     animation: fadeIn 0.5s ease-in-out;
 }
 @keyframes fadeIn {
@@ -257,4 +230,17 @@ footer { text-align: center; padding: 20px; margin-top: 30px; color: var(--foote
     display: block;
     padding: 14px 20px;
   }
+
+  .theme-toggle {
+    position: absolute;
+    right: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+}
+
+/* ===== 電腦版文字不換行 ===== */
+#navLinks li a {
+  white-space: nowrap;
+  font-size: 0.95rem;
 }
