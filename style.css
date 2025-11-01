@@ -1,0 +1,216 @@
+/* 使用 CSS 變數支援主題切換 */
+:root {
+    --bg-color: #f4f7f6; /* 淺灰色背景 */
+    --text-color: #333; /* 深色文字 */
+    --header-bg: #004a99;
+    --nav-bg: #333;
+    --nav-hover: #555;
+    --module-bg: white;
+    --module-border: #ddd;
+    --module-shadow: rgba(0,0,0,0.1);
+    --quiz-label: #555;
+    --quiz-button: #007BFF;
+    --quiz-button-hover: #0056b3;
+    --card-front-bg: #F5F5F5;
+    --card-front-text: #333;
+    --card-back-bg: #D1E7FD;
+    --card-back-text: #052C65;
+    --footer-text: #777;
+    --footer-border: #ddd;
+}
+
+body.dark-mode {
+    --bg-color: #1e1e1e; /* 深灰背景 */
+    --text-color: #ddd; /* 淺色文字 */
+    --header-bg: #002b5c;
+    --nav-bg: #222;
+    --nav-hover: #444;
+    --module-bg: #2c2c2c;
+    --module-border: #444;
+    --module-shadow: rgba(0,0,0,0.3);
+    --quiz-label: #bbb;
+    --quiz-button: #4a90e2;
+    --quiz-button-hover: #357abd;
+    --card-front-bg: #333;
+    --card-front-text: #ddd;
+    --card-back-bg: #1e3a5f;
+    --card-back-text: #a8d1ff;
+    --footer-text: #aaa;
+    --footer-border: #444;
+}
+
+/* 基礎樣式 */
+body {
+    background: var(--bg-color);
+    color: var(--text-color);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+    line-height: 1.6;
+    margin: 0;
+    padding: 0;
+}
+
+/* 黑暗模式切換按鈕 */
+.theme-toggle {
+    background: none;
+    border: none;
+    font-size: 1.2rem;
+    cursor: pointer;
+    padding: 14px 20px;
+    color: white;
+}
+
+/* 內容置中 */
+.ctr {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-bottom: 20px;
+}
+
+/* 網站佈局 */
+.container { max-width: 900px; margin: 0 auto; padding: 20px; }
+header { background-color: var(--header-bg); color: white; padding: 20px; text-align: center; }
+header h1 { margin: 0; }
+nav { background-color: var(--nav-bg); }
+nav ul { 
+    list-style: none; 
+    margin: 0; 
+    padding: 0; 
+    display: flex; 
+    justify-content: center; 
+    flex-wrap: wrap;
+}
+nav li a { display: block; color: white; padding: 14px 20px; text-decoration: none; }
+nav li a:hover { background-color: var(--nav-hover); }
+/* 目前選中章節的樣式 */
+nav li a.active {
+    background-color: #007BFF;
+    font-weight: bold;
+}
+
+/* 模組樣式 */
+.chapter-title { color: #004a99; border-bottom: 2px solid var(--module-border); padding-bottom: 10px; margin-top: 10px; }
+.learning-module { 
+    background-color: var(--module-bg);
+    border: 1px solid var(--module-border);
+    border-radius: 8px; 
+    padding: 25px; 
+    margin-top: 20px; 
+    box-shadow: 0 2px 5px var(--module-shadow);
+    /* 動畫 */
+    animation: fadeIn 0.5s ease-in-out;
+}
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.learning-module h2 { color: var(--text-color); margin-top: 0; }
+.learning-module p { color: var(--quiz-label); }
+/* 附錄中的圖片樣式 */
+.learning-module img {
+    max-width: 100%;
+    height: auto;
+    border-radius: 8px;
+    margin: 10px auto;
+    display: block;
+}
+
+/* 影片 */
+.video-container { position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; max-width: 100%; background: #000; margin-top: 20px; border-radius: 8px; }
+.video-container iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; }
+
+/* 測驗 */
+.quiz-form .quiz-question p { font-weight: bold; color: var(--text-color); }
+.quiz-form label { display: block; margin: 5px 0 5px 25px; cursor: pointer; color: var(--quiz-label); }
+.quiz-form input[type="radio"] { accent-color: var(--quiz-button); }
+.quiz-form button { background-color: var(--quiz-button); color: white; padding: 10px 20px; border: none; border-radius: 5px; cursor: pointer; font-size: 16px; }
+.quiz-form button:hover { background-color: var(--quiz-button-hover); }
+
+/* 字卡遊戲 */
+.flashcard-container { display: flex; flex-direction: column; align-items: center; }
+.flashcard { background-color: transparent; width: 300px; height: 200px; perspective: 1000px; cursor: pointer; }
+.flashcard-inner { position: relative; width: 100%; height: 100%; text-align: center; transition: transform 0.6s; transform-style: preserve-3d; }
+.flashcard.is-flipped .flashcard-inner { transform: rotateY(180deg); } 
+.card-face { position: absolute; width: 100%; height: 100%; -webkit-backface-visibility: hidden; backface-visibility: hidden; display: flex; justify-content: center; align-items: center; border-radius: 8px; box-shadow: 0 4px 8px var(--module-shadow); padding: 20px; box-sizing: border-box; }
+
+.card-front { 
+    background-color: var(--card-front-bg);
+    color: var(--card-front-text);
+    font-size: 24px; 
+}
+.card-back { 
+    background-color: var(--card-back-bg);
+    color: var(--card-back-text);
+    transform: rotateY(180deg); 
+}
+
+.flashcard-nav { margin-top: 20px; }
+.flashcard-nav button { padding: 8px 16px; margin: 0 10px; cursor: pointer; background-color: var(--module-bg); color: var(--text-color); border: 1px solid var(--module-border); border-radius: 4px; }
+.flashcard-nav button:hover { background-color: var(--nav-hover); }
+
+/* 頁尾 */
+footer { text-align: center; padding: 20px; margin-top: 30px; color: var(--footer-text); border-top: 1px solid var(--footer-border); }
+
+/* ===== 手機響應式導覽列（漢堡選單） ===== */
+.nav-container {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu-toggle {
+    display: none;
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    padding: 14px 20px;
+    z-index: 1000;
+}
+
+#navLinks {
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    overflow: hidden;
+    max-height: 500px; /* 展開時高度 */
+}
+
+/* 手機版：隱藏選單，顯示漢堡 */
+@media (max-width: 768px) {
+    .menu-toggle {
+        display: block;
+        position: absolute;
+        left: 0;
+    }
+    
+    #navLinks {
+        display: none;
+        flex-direction: column;
+        width: 100%;
+        background: var(--nav-bg);
+        position: absolute;
+        top: 100%;
+        left: 0;
+        max-height: 0;
+        opacity: 0;
+    }
+    
+    #navLinks.show {
+        display: flex;
+        max-height: 500px;
+        opacity: 1;
+    }
+    
+    nav li a {
+        text-align: center;
+    }
+
+    .theme-toggle {
+        position: absolute;
+        right: 0;
+    }
+}

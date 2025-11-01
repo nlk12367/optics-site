@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Eric Y的光學複習網</title>
+    <link rel="stylesheet" href="style.css" />
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>Wave</text></svg>">
+
+    <!-- MathJax 載入與設定 -->
+    <script>
+        window.MathJax = {
+            tex: {
+                inlineMath: [['\\(', '\\)']],
+                displayMath: [['$$', '$$']],
+                processEscapes: true
+            },
+            svg: { fontCache: 'global' }
+        };
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-svg.js" id="MathJax-script" async></script>
+</head>
+<body>
+
+<header>
+    <h1>Eric Y的光學複習網</h1>
+</header>
+
+<nav id="main-nav">
+    <div class="nav-container">
+        <!-- 手機漢堡按鈕 -->
+        <button class="menu-toggle" id="menuToggle">Menu</button>
+        
+        <!-- 導覽列 -->
+        <ul id="navLinks">
+            <li><a href="#chapter1" data-chapter="1">1. 波動</a></li>
+            <li><a href="#chapter2" data-chapter="2">2. 能量與動量</a></li>
+            <li><a href="#chapter3" data-chapter="3">3. 電磁波</a></li>
+            <li><a href="#chapter4" data-chapter="4">4. 波的疊加</a></li>
+            <li><a href="#chapter5" data-chapter="5">5. 偏振</a></li>
+            <li><a href="#appendix" data-chapter="appendix">附錄：二色向性</a></li>
+        </ul>
+
+        <!-- 黑暗模式切換按鈕 -->
+        <button id="theme-toggle" class="theme-toggle">🌙</button>
+    </div>
+</nav>
+
+<main id="content-area" class="container">
+    <!-- 內容由 script.js 動態載入 -->
+</main>
+
+<footer>
+    <p>&copy; 2025 Eric Y的光學複習網. All rights reserved.</p>
+</footer>
+
+<!-- script.js 負責 SPA 切換、測驗、字卡等 -->
+<script src="script.js"></script>
+
+<!-- 手機漢堡選單控制 -->
+<script>
+    document.getElementById('menuToggle').addEventListener('click', function() {
+        const navLinks = document.getElementById('navLinks');
+        navLinks.classList.toggle('show');
+    });
+
+    document.querySelectorAll('#navLinks a').forEach(link => {
+        link.addEventListener('click', () => {
+            if (window.innerWidth <= 768) {
+                document.getElementById('navLinks').classList.remove('show');
+            }
+        });
+    });
+</script>
+
+</body>
+</html>
