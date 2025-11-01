@@ -1,3 +1,17 @@
+// 手機漢堡選單
+document.getElementById('menuToggle').addEventListener('click', function() {
+  document.getElementById('navLinks').classList.toggle('show');
+});
+
+// 點選選項後自動關閉選單
+document.querySelectorAll('#navLinks a').forEach(link => {
+  link.addEventListener('click', () => {
+    document.getElementById('navLinks').classList.remove('show');
+  });
+});
+
+
+
 /* --- 
   儲存所有章節內容的地方
 --- */

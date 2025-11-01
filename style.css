@@ -153,87 +153,108 @@ nav li a.active {
 /* 頁尾 */
 footer { text-align: center; padding: 20px; margin-top: 30px; color: var(--footer-text); border-top: 1px solid var(--footer-border); }
 
-/* ===== 手機響應式導覽列（漢堡選單） ===== */
+/* ===== 導覽列容器 ===== */
+#main-nav {
+  background-color: var(--nav-bg);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 2px 10px var(--module-shadow);
+}
+
 .nav-container {
-    position: relative;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.menu-toggle {
-    display: none;
-    background: none;
-    border: none;
-    color: white;
-    font-size: 1.1rem;
-    font-weight: bold;
-    cursor: pointer;
-    padding: 14px 20px;
-    z-index: 1000;
-}
-
-#navLinks {
-    transition: max-height 0.3s ease, opacity 0.3s ease;
-    overflow: hidden;
-    max-height: 500px; /* 展開時高度 */
-}
-
-/* 手機版：隱藏選單，顯示漢堡 */
-@media (max-width: 768px) {
-    .menu-toggle {
-        display: block;
-        position: absolute;
-        left: 0;
-    }
-    
-    #navLinks {
-        display: none;
-        flex-direction: column;
-        width: 100%;
-        background: var(--nav-bg);
-        position: absolute;
-        top: 100%;
-        left: 0;
-        max-height: 0;
-        opacity: 0;
-    }
-    
-    #navLinks.show {
-        display: flex;
-        max-height: 500px;
-        opacity: 1;
-    }
-    
-    nav li a {
-        text-align: center;
-    }
-
-    .theme-toggle {
-        position: absolute;
-        right: 0;
-    }
-}
-
-/* ===== 導覽列置中 ===== */
-nav {
+  max-width: 1000px;
+  margin: 0 auto;
   display: flex;
-  justify-content: center;
-  background-color: #333;
-  padding: 10px 0;
-  flex-wrap: wrap; /* 手機版自動換行 */
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
 }
 
-nav a {
+/* ===== 選單列表 ===== */
+#navLinks {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+#navLinks li a {
   color: white;
   text-decoration: none;
-  padding: 12px 20px;
-  margin: 0 5px;
+  padding: 12px 18px;
   border-radius: 8px;
-  transition: all 0.3s ease;
   font-weight: 500;
+  transition: all 0.3s ease;
+  white-space: nowrap;
 }
 
-nav a:hover, nav a.active {
+#navLinks li a:hover,
+#navLinks li a.active {
   background-color: #007acc;
+  transform: translateY(-1px);
+}
+
+/* ===== 漢堡按鈕 ===== */
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: white;
+  font-size: 1.4rem;
+  font-weight: bold;
+  cursor: pointer;
+  padding: 10px;
+}
+
+/* ===== 黑暗模式按鈕 ===== */
+.theme-toggle {
+  background: none;
+  border: none;
+  font-size: 1.4rem;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+.theme-toggle:hover {
+  background-color: rgba(255,255,255,0.1);
+}
+
+/* ===== 手機版響應式 ===== */
+@media (max-width: 768px) {
+  .menu-toggle {
+    display: block;
+  }
+
+  #navLinks {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    background-color: var(--nav-bg);
+    padding: 10px 0;
+    box-shadow: 0 4px 10px var(--module-shadow);
+    border-radius: 0 0 12px 12px;
+  }
+
+  #navLinks.show {
+    display: flex;
+  }
+
+  #navLinks li {
+    width: 100%;
+    text-align: center;
+  }
+
+  #navLinks li a {
+    display: block;
+    padding: 14px 20px;
+  }
 }
